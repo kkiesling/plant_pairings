@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 75%;
+            height: 100%;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+        #config {
+            float: left;
+            width: 400px;
+            height: 600px;
+        }
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<div id = "config"></div>
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": "RED/ROSE MILKWEED", "label": "RED/ROSE MILKWEED", "shape": "dot", "size": 10}, {"id": "MONKEY FLOWER", "label": "MONKEY FLOWER", "shape": "dot", "size": 10}, {"id": "BUTTERFLY WEED", "label": "BUTTERFLY WEED", "shape": "dot", "size": 10}, {"id": "COMMON MILKWEED", "label": "COMMON MILKWEED", "shape": "dot", "size": 10}, {"id": "JOE PYE WEED", "label": "JOE PYE WEED", "shape": "dot", "size": 10}, {"id": "ROSE MALLOW", "label": "ROSE MALLOW", "shape": "dot", "size": 10}, {"id": "SWAMP ROSE MALLOW", "label": "SWAMP ROSE MALLOW", "shape": "dot", "size": 10}, {"id": "TURTLEHEAD", "label": "TURTLEHEAD", "shape": "dot", "size": 10}, {"id": "GREAT BLUE LOBELIA", "label": "GREAT BLUE LOBELIA", "shape": "dot", "size": 10}, {"id": "CARDINAL FLOWER", "label": "CARDINAL FLOWER", "shape": "dot", "size": 10}, {"id": "OBEDIENT PLANT", "label": "OBEDIENT PLANT", "shape": "dot", "size": 10}, {"id": "BOTTLE GENTIAN", "label": "BOTTLE GENTIAN", "shape": "dot", "size": 10}, {"id": "MICHIGAN LILY", "label": "MICHIGAN LILY", "shape": "dot", "size": 10}, {"id": "SWEET JOE PYE-WEED", "label": "SWEET JOE PYE-WEED", "shape": "dot", "size": 10}, {"id": "BIG BLUESTEM GRASS", "label": "BIG BLUESTEM GRASS", "shape": "dot", "size": 10}, {"id": "LITTLE BLUESTEM GRASS", "label": "LITTLE BLUESTEM GRASS", "shape": "dot", "size": 10}, {"id": "GARDEN PHLOX", "label": "GARDEN PHLOX", "shape": "dot", "size": 10}, {"id": "WILD BLUE PHLOX", "label": "WILD BLUE PHLOX", "shape": "dot", "size": 10}, {"id": "SMOOTH/MARSH PHLOX", "label": "SMOOTH/MARSH PHLOX", "shape": "dot", "size": 10}, {"id": "COLUMBINE", "label": "COLUMBINE", "shape": "dot", "size": 10}, {"id": "TALL THIMBLEWEED", "label": "TALL THIMBLEWEED", "shape": "dot", "size": 10}, {"id": "JACOB\u0027S LADDER", "label": "JACOB\u0027S LADDER", "shape": "dot", "size": 10}, {"id": "VIRGINIA BLUEBELL", "label": "VIRGINIA BLUEBELL", "shape": "dot", "size": 10}, {"id": "SOLOMON\u0027S PLUME", "label": "SOLOMON\u0027S PLUME", "shape": "dot", "size": 10}, {"id": "TRILLIUM", "label": "TRILLIUM", "shape": "dot", "size": 10}, {"id": "JACK-IN-THE-PULPIT", "label": "JACK-IN-THE-PULPIT", "shape": "dot", "size": 10}, {"id": "WILD GERANIUM", "label": "WILD GERANIUM", "shape": "dot", "size": 10}, {"id": "WILD BERGAMOT", "label": "WILD BERGAMOT", "shape": "dot", "size": 10}, {"id": "ORANGE CONEFLOWER", "label": "ORANGE CONEFLOWER", "shape": "dot", "size": 10}, {"id": "SWEET BLACK EYED SUSAN", "label": "SWEET BLACK EYED SUSAN", "shape": "dot", "size": 10}, {"id": "PURPLE CONEFLOWER", "label": "PURPLE CONEFLOWER", "shape": "dot", "size": 10}, {"id": "CULVERS ROOT", "label": "CULVERS ROOT", "shape": "dot", "size": 10}, {"id": "BLUE WILD INDIGO", "label": "BLUE WILD INDIGO", "shape": "dot", "size": 10}, {"id": "ROYAL CATCHFLY", "label": "ROYAL CATCHFLY", "shape": "dot", "size": 10}, {"id": "PRAIRIE BLAZING STAR", "label": "PRAIRIE BLAZING STAR", "shape": "dot", "size": 10}, {"id": "PURPLE PRAIRIE CLOVER", "label": "PURPLE PRAIRIE CLOVER", "shape": "dot", "size": 10}, {"id": "COMMON BLUE VIOLET", "label": "COMMON BLUE VIOLET", "shape": "dot", "size": 10}, {"id": "MIDLAND SHOOTING STAR", "label": "MIDLAND SHOOTING STAR", "shape": "dot", "size": 10}, {"id": "SMOOTH ASTER", "label": "SMOOTH ASTER", "shape": "dot", "size": 10}, {"id": "SKY BLUE ASTER", "label": "SKY BLUE ASTER", "shape": "dot", "size": 10}, {"id": "SILKY ASTER", "label": "SILKY ASTER", "shape": "dot", "size": 10}, {"id": "WILD LUPINE", "label": "WILD LUPINE", "shape": "dot", "size": 10}, {"id": "LEAD PLANT", "label": "LEAD PLANT", "shape": "dot", "size": 10}, {"id": "BUTTON BLAZING STAR", "label": "BUTTON BLAZING STAR", "shape": "dot", "size": 10}, {"id": "PRAIRIE SMOKE", "label": "PRAIRIE SMOKE", "shape": "dot", "size": 10}, {"id": "ANISE HYSSOP", "label": "ANISE HYSSOP", "shape": "dot", "size": 10}, {"id": "RIDDELL\u0027S GOLDENROD", "label": "RIDDELL\u0027S GOLDENROD", "shape": "dot", "size": 10}, {"id": "HAIRY BEARDTONGUE", "label": "HAIRY BEARDTONGUE", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": "RED/ROSE MILKWEED", "to": "MONKEY FLOWER", "weight": 1}, {"from": "RED/ROSE MILKWEED", "to": "BUTTERFLY WEED", "weight": 1}, {"from": "RED/ROSE MILKWEED", "to": "COMMON MILKWEED", "weight": 1}, {"from": "RED/ROSE MILKWEED", "to": "JOE PYE WEED", "weight": 1}, {"from": "RED/ROSE MILKWEED", "to": "ROSE MALLOW", "weight": 1}, {"from": "RED/ROSE MILKWEED", "to": "SWAMP ROSE MALLOW", "weight": 1}, {"from": "TURTLEHEAD", "to": "GREAT BLUE LOBELIA", "weight": 1}, {"from": "TURTLEHEAD", "to": "CARDINAL FLOWER", "weight": 1}, {"from": "TURTLEHEAD", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "TURTLEHEAD", "to": "BOTTLE GENTIAN", "weight": 1}, {"from": "TURTLEHEAD", "to": "MICHIGAN LILY", "weight": 1}, {"from": "JOE PYE WEED", "to": "MONKEY FLOWER", "weight": 1}, {"from": "JOE PYE WEED", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "JOE PYE WEED", "to": "SWEET JOE PYE-WEED", "weight": 1}, {"from": "JOE PYE WEED", "to": "ROSE MALLOW", "weight": 1}, {"from": "JOE PYE WEED", "to": "SWAMP ROSE MALLOW", "weight": 1}, {"from": "BIG BLUESTEM GRASS", "to": "LITTLE BLUESTEM GRASS", "weight": 1}, {"from": "GARDEN PHLOX", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "GARDEN PHLOX", "to": "SMOOTH/MARSH PHLOX", "weight": 1}, {"from": "COLUMBINE", "to": "TALL THIMBLEWEED", "weight": 1}, {"from": "COLUMBINE", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "COLUMBINE", "to": "JACOB\u0027S LADDER", "weight": 1}, {"from": "COLUMBINE", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "COLUMBINE", "to": "SOLOMON\u0027S PLUME", "weight": 1}, {"from": "COLUMBINE", "to": "TRILLIUM", "weight": 1}, {"from": "COLUMBINE", "to": "JACK-IN-THE-PULPIT", "weight": 1}, {"from": "COLUMBINE", "to": "WILD GERANIUM", "weight": 1}, {"from": "BUTTERFLY WEED", "to": "COMMON MILKWEED", "weight": 1}, {"from": "COMMON MILKWEED", "to": "WILD BERGAMOT", "weight": 1}, {"from": "ORANGE CONEFLOWER", "to": "LITTLE BLUESTEM GRASS", "weight": 1}, {"from": "ORANGE CONEFLOWER", "to": "SWEET BLACK EYED SUSAN", "weight": 1}, {"from": "SWEET BLACK EYED SUSAN", "to": "MONKEY FLOWER", "weight": 1}, {"from": "SWEET BLACK EYED SUSAN", "to": "ROSE MALLOW", "weight": 1}, {"from": "SWEET BLACK EYED SUSAN", "to": "WILD BERGAMOT", "weight": 1}, {"from": "SWEET BLACK EYED SUSAN", "to": "SWAMP ROSE MALLOW", "weight": 1}, {"from": "PURPLE CONEFLOWER", "to": "MONKEY FLOWER", "weight": 1}, {"from": "PURPLE CONEFLOWER", "to": "CULVERS ROOT", "weight": 1}, {"from": "PURPLE CONEFLOWER", "to": "ROSE MALLOW", "weight": 1}, {"from": "PURPLE CONEFLOWER", "to": "WILD BERGAMOT", "weight": 1}, {"from": "PURPLE CONEFLOWER", "to": "SWAMP ROSE MALLOW", "weight": 1}, {"from": "BLUE WILD INDIGO", "to": "WILD BERGAMOT", "weight": 1}, {"from": "CARDINAL FLOWER", "to": "GREAT BLUE LOBELIA", "weight": 1}, {"from": "CARDINAL FLOWER", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "CARDINAL FLOWER", "to": "ROYAL CATCHFLY", "weight": 1}, {"from": "CARDINAL FLOWER", "to": "MICHIGAN LILY", "weight": 1}, {"from": "GREAT BLUE LOBELIA", "to": "MONKEY FLOWER", "weight": 1}, {"from": "GREAT BLUE LOBELIA", "to": "SWAMP ROSE MALLOW", "weight": 1}, {"from": "GREAT BLUE LOBELIA", "to": "MICHIGAN LILY", "weight": 1}, {"from": "GREAT BLUE LOBELIA", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "GREAT BLUE LOBELIA", "to": "ROSE MALLOW", "weight": 1}, {"from": "SOLOMON\u0027S PLUME", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "SOLOMON\u0027S PLUME", "to": "WILD GERANIUM", "weight": 1}, {"from": "SOLOMON\u0027S PLUME", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "SOLOMON\u0027S PLUME", "to": "TRILLIUM", "weight": 1}, {"from": "SOLOMON\u0027S PLUME", "to": "JACK-IN-THE-PULPIT", "weight": 1}, {"from": "CULVERS ROOT", "to": "PRAIRIE BLAZING STAR", "weight": 1}, {"from": "CULVERS ROOT", "to": "PURPLE PRAIRIE CLOVER", "weight": 1}, {"from": "CULVERS ROOT", "to": "WILD BERGAMOT", "weight": 1}, {"from": "JACK-IN-THE-PULPIT", "to": "JACOB\u0027S LADDER", "weight": 1}, {"from": "JACK-IN-THE-PULPIT", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "JACK-IN-THE-PULPIT", "to": "TRILLIUM", "weight": 1}, {"from": "JACK-IN-THE-PULPIT", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "JACK-IN-THE-PULPIT", "to": "WILD GERANIUM", "weight": 1}, {"from": "SWAMP ROSE MALLOW", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "SWAMP ROSE MALLOW", "to": "PRAIRIE BLAZING STAR", "weight": 1}, {"from": "SWAMP ROSE MALLOW", "to": "ROSE MALLOW", "weight": 1}, {"from": "COMMON BLUE VIOLET", "to": "MIDLAND SHOOTING STAR", "weight": 1}, {"from": "SMOOTH ASTER", "to": "MONKEY FLOWER", "weight": 1}, {"from": "SMOOTH ASTER", "to": "SKY BLUE ASTER", "weight": 1}, {"from": "SMOOTH ASTER", "to": "WILD BERGAMOT", "weight": 1}, {"from": "BOTTLE GENTIAN", "to": "MONKEY FLOWER", "weight": 1}, {"from": "BOTTLE GENTIAN", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "BOTTLE GENTIAN", "to": "ROSE MALLOW", "weight": 1}, {"from": "SILKY ASTER", "to": "SKY BLUE ASTER", "weight": 1}, {"from": "WILD LUPINE", "to": "LEAD PLANT", "weight": 1}, {"from": "ROSE MALLOW", "to": "OBEDIENT PLANT", "weight": 1}, {"from": "ROSE MALLOW", "to": "PRAIRIE BLAZING STAR", "weight": 1}, {"from": "LEAD PLANT", "to": "BUTTON BLAZING STAR", "weight": 1}, {"from": "LEAD PLANT", "to": "PURPLE PRAIRIE CLOVER", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "MIDLAND SHOOTING STAR", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "TRILLIUM", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "PRAIRIE SMOKE", "weight": 1}, {"from": "JACOB\u0027S LADDER", "to": "WILD GERANIUM", "weight": 1}, {"from": "ANISE HYSSOP", "to": "WILD BERGAMOT", "weight": 1}, {"from": "TRILLIUM", "to": "MIDLAND SHOOTING STAR", "weight": 1}, {"from": "TRILLIUM", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "TRILLIUM", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "TRILLIUM", "to": "WILD GERANIUM", "weight": 1}, {"from": "WILD GERANIUM", "to": "TALL THIMBLEWEED", "weight": 1}, {"from": "WILD GERANIUM", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "WILD GERANIUM", "to": "WILD BLUE PHLOX", "weight": 1}, {"from": "WILD BLUE PHLOX", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "WILD BLUE PHLOX", "to": "SMOOTH/MARSH PHLOX", "weight": 1}, {"from": "BUTTON BLAZING STAR", "to": "PRAIRIE BLAZING STAR", "weight": 1}, {"from": "MIDLAND SHOOTING STAR", "to": "VIRGINIA BLUEBELL", "weight": 1}, {"from": "PRAIRIE BLAZING STAR", "to": "MONKEY FLOWER", "weight": 1}, {"from": "PURPLE PRAIRIE CLOVER", "to": "WILD BERGAMOT", "weight": 1}, {"from": "OBEDIENT PLANT", "to": "MONKEY FLOWER", "weight": 1}, {"from": "OBEDIENT PLANT", "to": "MICHIGAN LILY", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+        // if this network requires displaying the configure window,
+        // put it in its div
+        options.configure["container"] = document.getElementById("config");
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
