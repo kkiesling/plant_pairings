@@ -1,8 +1,8 @@
 import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
-
 from pyvis.network import Network
+
 net = Network(height='100%', width='75%')
 
 df = pd.DataFrame()
@@ -13,11 +13,14 @@ df.columns = cols
 
 graph = nx.Graph()
 graph.add_nodes_from(cols)
+soil_color = {'D': '#Be4025', 'M': '#149d1e', 'W': '#2525be'}
 
 for planta in df.columns:
+    soil = df[planta]['soil moisture']
+    color = soil_color[soil]
+    graph.add_node(planta, color=color)
     for plantb in cols:
         if (df[planta][plantb] == 'x') and (planta != plantb):
-            print(planta, plantb)
             graph.add_edge(planta, plantb)
 
 net.from_nx(graph)
