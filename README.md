@@ -19,3 +19,8 @@ that contains the pairing information.
 To run:
 
 `plot_network.py plant-pairing-data.csv`
+
+Output:
+-------
+A file called `plant_network.html` will be generated and automatically opened
+in your web browser where you can visualize the information.
