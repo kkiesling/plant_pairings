@@ -18,4 +18,4 @@ that contains the pairing information.
 
 To run:
 
-> plot_network.py plant-pairing-data.csv
+:code: plot_network.py plant-pairing-data.csv
