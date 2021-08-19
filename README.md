@@ -2,7 +2,7 @@ Description
 -----------
 
 This tool is designed to visualize plant organization based on data from
-Prairie Moon Nursery (PMN).
+[Prairie Moon Nursery](https://www.prairiemoon.com/) (PMN).
 
 For each plant, PMN lists other plants that will pair well with it under
 the category "Pair with..." at the bottom of the product listing.
