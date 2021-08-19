@@ -22,5 +22,21 @@ To run:
 
 Output:
 -------
+
 A file called `plant_network.html` will be generated and automatically opened
 in your web browser where you can visualize the information.
+
+Contribute:
+-----------
+
+Do you have an idea for making this tool better? If you are on Github
+contribute by either making an issue or forking and making a pull request.
+Not a software developer but still have an idea? No problem! Send me an email
+(click on my bio) with your idea and I will do my best to incorporate it.
+
+Disclaimer:
+-----------
+
+This is a hobby project for me and I will develop it as I have time to do so.
+Contributions always welcome. I am not getting paid by anyone, including PMN,
+to develop this tool.
